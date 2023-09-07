@@ -59,9 +59,8 @@
                         @endif
 
                         @if ($editing_id === $todo->id)
-                            <input type="text" placeholder="Todo.."
-                                class="bg-gray-100  text-gray-900 text-sm rounded block w-full p-2.5"
-                                value="{{ $todo->name }}">
+                            <input wire:model='new_name' type="text" placeholder="Todo.."
+                                class="bg-gray-100  text-gray-900 text-sm rounded block w-full p-2.5">
                             @error('new_name')
                                 <span class="text-red-500 text-xs block">{{ $message }}</span>
                             @enderror
@@ -103,9 +102,9 @@
                 </div>
                 <div class="mt-3 text-xs text-gray-700">
                     @if ($editing_id === $todo->id)
-                        <button
+                        <button wire:click='update({{ $todo->id }})'
                             class="mt-3 px-4 py-2 bg-teal-500 text-white font-semibold rounded hover:bg-teal-600">Update</button>
-                        <button
+                        <button wire:click='cancel_edit'
                             class="mt-3 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600">Cancel</button>
                     @endif
 

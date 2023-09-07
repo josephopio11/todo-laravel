@@ -50,6 +50,11 @@ class TodoList extends Component
         $this->new_name = $todo->name;
     }
 
+    public function cancel_edit()
+    {
+        $this->reset('new_name', 'editing_id');
+    }
+
     public function render()
     {
         $todos = Todo::latest()->where('name','like',"%$this->search%")->paginate(5);
