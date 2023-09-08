@@ -41,7 +41,7 @@ class TodoList extends Component
     public function toggle(Todo $todo)
     {
         $todo->update(['completed' => !$todo->completed]);
-        session()->flash('updated'.$todo->id, 'Updated!');
+        session()->flash('updated'.$todo->id, 'Task updated successfully!');
     }
 
     public function edit(Todo $todo)
@@ -53,6 +53,16 @@ class TodoList extends Component
     public function cancel_edit()
     {
         $this->reset('new_name', 'editing_id');
+    }
+
+    public function update(Todo $todo)
+    {
+        $this->validateOnly('new_name');
+
+        $todo->update(['name' => $this->new_name]);
+
+        $this->reset('new_name', 'editing_id');
+        session()->flash('updated'.$todo->id, 'Task modified successfully!');
     }
 
     public function render()
